@@ -1,0 +1,119 @@
+filetype plugin indent on							" Turn on the filetype plugin
+set sessionoptions=blank,buffers,folds,help,resize,tabpages,winpos,winsize  	" Set session persistence options
+set enc=utf-8                                                               	" Set UTF-8 encoding
+set fenc=utf-8
+set termencoding=utf-8
+set nocompatible                                                            " Disable vi compatibility (emulation of old bugs)
+set autoindent                                                              " Use indentation of previous line
+set smartindent                                                             " Use intelligent indentation for C
+set tabstop=4                                                               " Tab width is 4 spaces
+set shiftwidth=4                                                            " Indent also with 4 spaces
+set expandtab                                                               " Expand tabs to spaces
+set nowrap                                                                  " Do not wrap lines
+set noequalalways                                                           " Do not maintain window-size ratio (when having multiple window splits I don't find it desirable)
+set textwidth=120                                                           " Wrap lines at 120 chars. 80 is somewhat antiquated with nowadays displays.
+syntax on                                                                   " Turn syntax highlighting on
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch                                                                " Highlight all search results
+set number                                                                  " Turn line numbers on
+set showmatch                                                               " Highlight matching braces
+set comments=sl:/*,mb:\ *,elx:\ */                                          " Intelligent comments
+set wildmode=longest:full                                                   " Use intelligent file completion like in the bash
+set wildmenu
+set hidden                                                                  " Allow changing buffers without saving them
+set cul                                                                     " Highlight the current line
+set backspace=2                                                             " Backspace tweaks
+set backspace=indent,eol,start
+set smarttab
+
+set nobackup
+set noswapfile
+set nowritebackup
+
+
+syntax enable                                                           " 开启语法高亮
+set t_Co=256                                                            " Set the color scheme
+set background=dark
+colorscheme solarized
+
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-l> :tabn<CR>
+nnoremap <C-x> :tabclose<CR>
+
+
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'altercation/vim-colors-solarized', { 'do': 'mkdir p ~/.vim/colors && ln -sf ~/.vim/plugged/vim-colors-solarized/colors/solarized.vim ~/.vim/colors/solarized.vim' }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'vim-scripts/a.vim'
+Plug 'Rip-Rip/clang_complete', { 'do': 'make install' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Initialize plugin system
+call plug#end()
+
+
+" Code completion plugin
+set complete-=t                                             " Do not search tag files when auto-completing
+set complete-=i                                             " Do not search include files when auto-completing
+set completeopt=menu,menuone                                " Complete options (disable preview scratch window, longest removed to aways show menu)
+set pumheight=20                                            " Limit popup menu height
+set concealcursor=inv                                       " Conceal in insert (i), normal (n) and visual (v) modes
+set conceallevel=2                                          " Hide concealed text completely unless replacement character is defined
+let g:clang_use_library = 1                                 " Use libclang directly
+let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'            " Path to the libclang on the system
+let g:clang_complete_auto = 1                               " Run autocompletion immediatelly after ->, ., ::
+let g:clang_complete_copen = 1                              " Open quickfix window on error
+let g:clang_periodic_quickfix = 0                           " Turn-off periodic updating of quickfix window (g:ClangUpdateQuickFix() does the same)
+let g:clang_snippets = 1                                    " Enable function args autocompletion, template parameters, ...
+let g:clang_snippets_engine = 'ultisnips'                   " Use UltiSnips engine for function args autocompletion (provides mechanism to jump over to the next argument)
+let g:clang_conceal_snippets = 1                            " clang_complete engine related setting
+"let g:clang_trailing_placeholder = 1                       " clang_complete engine related setting
+"let g:clang_hl_errors = 0                                  " Turn-off error highlighting
+"let g:clang_complete_patterns = 1                          " (Does not work for me) Turn-on autocompletion for language constructs (i.e. loops)
+"let g:clang_complete_macros = 1
+"let g:clang_user_options='|| exit 0'                       " Avoid freezing on offending code
+
+
+" UltiSnips plugin
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" SuperTab plugin
+"let loaded_supertab = 1                                    " Uncomment the this line to disable the plugin
+let g:SuperTabDefaultCompletionType='<c-x><c-u>'            " 'user' defined default completion type
+let g:SuperTabDefaultCompletionType = 'context'             " 'context' defined default completion type
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabLongestHighlight=1
+let g:SuperTabLongestEnhanced=1
+
+" Airline plugin
+set laststatus=2
+"let g:airline_powerline_fonts = 1                           " Use Powerline fonts to show beautiful symbols
+let g:airline_symbols_ascii = 1
+let g:airline_theme = 'murmur'                              " Select 'murmur' theme as default one
+let g:airline_inactive_collapse = 0                         " Do not collapse the status line while having multiple windows
+let g:airline#extensions#whitespace#enabled = 0             " Do not check for whitespaces
+let g:airline#extensions#tabline#enabled = 1                " Display tab bar with buffers
+let g:airline#extensions#branch#enabled = 1                 " Enable Git client integration
+let g:airline#extensions#tagbar#enabled = 1                 " Enable Tagbar integration
+let g:airline#extensions#hunks#enabled = 1                  " Enable Git hunks integration
+
+" NERDTree plugin
+let g:NERDTreeMouseMode = 2                                 " Single-click to expand the directory, double-click to open the file
+let g:NERDTreeShowHidden = 1                                " Show hidden files
