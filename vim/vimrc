@@ -48,7 +48,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'Rip-Rip/clang_complete', { 'do': 'make install', 'for': ['cpp', 'c'] }
 Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 Plug 'ervandew/supertab'
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'vim-airline/vim-airline'
@@ -143,4 +143,4 @@ nnoremap <C-w> <C-w>w                " 设置切换窗口快捷键
 "tab选项卡快捷键
 nnoremap <C-h> :tabp<CR>
 nnoremap <C-l> :tabn<CR>
-nnoremap <C-x> :tabclose<CR>
+nnoremap <C-q> :tabclose<CR>
