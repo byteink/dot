@@ -20,7 +20,7 @@ set hlsearch                                                                " Hi
 set number                                                                  " Turn line numbers on
 set showmatch                                                               " Highlight matching braces
 set comments=sl:/*,mb:\ *,elx:\ */                                          " Intelligent comments
-set wildmode=longest:full                                                   " Use intelligent file completion like in the bash
+set wildmode=full                                                           " Use intelligent file completion like in the bash
 set wildmenu
 set hidden                                                                  " Allow changing buffers without saving them
 set cul                                                                     " Highlight the current line
